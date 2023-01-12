@@ -26,11 +26,11 @@ Because some of these social networks adopted the slogan *"Move fast and break t
 
 #### Quickstart
 
-To get the project up and running, fork the repo and run:
+To get the project up and running, clone (not fork) the repo and run:
 
 ```
 pip install -r requirements.txt
 flask --debug run
 ```
 
-The submission should just be a link to your forked repo.
+The submission should just be a link to your cloned repo.
