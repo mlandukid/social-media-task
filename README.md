@@ -1,34 +1,59 @@
-# **RelyComply Social Media Coding Task**
 
-#### Problem
+# RelyComply Social Media Activity API
 
-Our client, Morgain Stainley, needs an API with live data on the activity levels of different social networks to serve as an input to their AI trading bots. Specifically, they need an endpoint they can query to get a numeric indicator of the amount of content posted on each social network. This should be a quick little task, but the client is paying us a billion dollars so your implementation needs to be robust and fast.
+## Overview
 
-#### Solution
+This Flask application provides an API endpoint to fetch live data on the activity levels of different social networks. It's designed to serve as an input for AI trading bots, offering a numeric indicator of the amount of content posted on each social network. The application fetches data asynchronously from predefined social media endpoints and handles unpredictable responses and potential errors gracefully.
 
-Fortunately, we’ve found some very simple endpoints that returns social media content from the last hour (don't tell the client!):
+## Features
 
-- [https://takehome.io/twitter](https://takehome.io/twitter)
-- [https://takehome.io/facebook](https://takehome.io/facebook)
-- https://takehome.io/instagram
+- Asynchronous data fetching from multiple social media endpoints.
+- Robust error handling to cope with unreliable external APIs.
+- Returns a JSON response with the count of activities for each social media platform.
 
-A Flask server has been set up in `app.py`. Complete the provided endpoint so that it will return a JSON response with the amount of activity currently on the platform, for example `{"instagram": 4, "facebook": 9, "twitter": 3}`.
+## Requirements
 
-Because speed is everything in the trading world, the calls to the 3 social media endpoints need to be made in parallel, i.e. using multi-threading or async. Morgain Stainley wants their bots to be the fastest.
+- Python 3
+- Flask
+- aiohttp
 
-If you are in doubt of a detail of the spec just use your best judgement and let me know what you decided with the submission.
+## Installation
 
-#### Caveat
+1. Install the required Python packages:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Because some of these social networks adopted the slogan *"Move fast and break things"*, they don't always respond predictably. They break. And respond with invalid JSON. Life's hard. You will need to deal with errors as you see fit.
+## Running the Application
 
-#### Quickstart
+1. To start the Flask server, run:
+   ```bash
+   flask run
+   ```
 
-To get the project up and running, clone (not fork) the repo and run:
+2. By default, the server will start on `http://127.0.0.1:5000`.
 
-```
-pip install -r requirements.txt
-flask --debug run
-```
+## Testing the Endpoint
 
-The submission should just be a link to your cloned repo.
+1. To check if the endpoint is running and functioning correctly, you can use a tool like `curl` or any API testing tool like Postman.
+
+2. Use the following command or set up a request in your API tool:
+   ```bash
+   curl http://127.0.0.1:5000/social_network_activity
+   ```
+
+3. The endpoint should return a JSON response with the count of activities for each social media platform, such as:
+   ```json
+   {
+     "twitter": 2,
+     "facebook": 5,
+     "instagram": 3
+   }
+   ```
+
+   In case of an error while fetching data from any social media platform, the count will be `0`.
+
+## Notes
+
+- The application handles errors by returning `0` for a specific platform if there is an issue fetching data.
+- The error handling can be observed by intentionally pointing to a non-existing or faulty endpoint.
